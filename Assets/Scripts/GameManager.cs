@@ -48,8 +48,8 @@ public class GameManager : MonoBehaviour {
         if (Application.platform == RuntimePlatform.WebGLPlayer) {
             hiScore = PlayerPrefs.GetInt("HiScore", 0);
         } else {
-            if (File.Exists("Score.xml")) {
-                Stream stream = File.Open("Score.xml", FileMode.Open);
+            if (File.Exists(Path.Combine(Application.persistentDataPath, "Score.xml"))) {
+                Stream stream = File.Open(Path.Combine(Application.persistentDataPath, "Score.xml"), FileMode.Open);
                 XmlSerializer serializer = new XmlSerializer(typeof(SaveObject));
                 saveObject = serializer.Deserialize(stream) as SaveObject;
                 stream.Close();
@@ -65,7 +65,7 @@ public class GameManager : MonoBehaviour {
         if (Application.platform == RuntimePlatform.WebGLPlayer) {
             PlayerPrefs.SetInt("HiScore", hiScore);
         } else {
-            Stream stream = File.Open("Score.xml", FileMode.Create);
+            Stream stream = File.Open(Path.Combine(Application.persistentDataPath, "Score.xml"), FileMode.Create);
             XmlSerializer serializer = new XmlSerializer(typeof(SaveObject));
             serializer.Serialize(stream, saveObject);
             stream.Close();

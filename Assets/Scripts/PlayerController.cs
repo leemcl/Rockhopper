@@ -87,13 +87,11 @@ public class PlayerController : MonoBehaviour {
     }
 
     void OnJump() {
-        transform.parent = null;
-
-        transform.localScale = Vector3.one;
-
-        timeStamp = Time.time;
-
         if (state == PlayerState.Idle) {
+            transform.parent = null;
+            transform.localScale = Vector3.one;
+            timeStamp = Time.time;
+
             state = PlayerState.Jumping;
         }
     }
